@@ -7,38 +7,16 @@
 import './global.css';
 
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-import {Button} from '~/components/ui/button';
-import {Flex} from '~/components/ui/flex';
-import {Text} from '~/components/ui/text';
+import {SafeAreaView, StatusBar, View} from 'react-native';
+import Navigation from '~/navigation';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <Flex className="flex-col gap-2 p-2">
-        <Button>
-          <Text>Button</Text>
-        </Button>
-        <Button className="bg-secondary">
-          <Text className="text-secondary-foreground">Button</Text>
-        </Button>
-        <Button className="bg-accent">
-          <Text className="text-accent-foreground">Button</Text>
-        </Button>
-        <Button className="bg-destructive">
-          <Text>Button</Text>
-        </Button>
-        <Button className="bg-muted">
-          <Text className="text-muted-foreground">Button</Text>
-        </Button>
-        <Button className="bg-primary">
-          <Text>Button</Text>
-        </Button>
-        <Button className="bg-foreground">
-          <Text>Button</Text>
-        </Button>
-      </Flex>
+    <SafeAreaView className="flex-1">
+      <StatusBar barStyle="default" backgroundColor="#ffffff" />
+      <View className="flex-1 bg-primary">
+        <Navigation />
+      </View>
     </SafeAreaView>
   );
 }
