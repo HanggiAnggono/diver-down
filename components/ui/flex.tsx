@@ -8,7 +8,7 @@ export function Flex({
   ...props
 }: PropsWithChildren<{className?: string}>) {
   return (
-    <View {...props} className={cn('flex', props.className)}>
+    <View {...props} className={cn('flex flex-row', props.className)}>
       {children}
     </View>
   );

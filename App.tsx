@@ -7,17 +7,20 @@
 import './global.css';
 
 import React from 'react';
-import {SafeAreaView, StatusBar, View} from 'react-native';
+import {View} from 'react-native';
 import Navigation from '~/navigation';
+import {Provider} from 'react-redux';
+import store from './store/store';
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaView className="flex-1">
-      <StatusBar barStyle="default" backgroundColor="#ffffff" />
-      <View className="flex-1 bg-primary">
+    <Provider store={store}>
+      <View className="flex-1">
         <Navigation />
       </View>
-    </SafeAreaView>
+    </Provider>
   );
 }
 
