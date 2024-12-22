@@ -1,223 +1,24 @@
 import {Brand, Model, TestDrive, TestDriveStatus, Unit} from '~/services';
+import {faker} from '@faker-js/faker';
 
-export const brands: Array<Brand> = [
-  {id: '1', name: 'Hyundai', description: 'Hyundai description'},
-  {id: '2', name: 'Toyota', description: 'Toyota description'},
-  {id: '3', name: 'Honda', description: 'Honda description'},
-  {id: '4', name: 'Ford', description: 'Ford description'},
-  {id: '5', name: 'Chevrolet', description: 'Chevrolet description'},
-  {id: '6', name: 'Volkswagen', description: 'Volkswagen description'},
-  {id: '7', name: 'Nissan', description: 'Nissan description'},
-  {id: '8', name: 'Mazda', description: 'Mazda description'},
-  {id: '9', name: 'Kia', description: 'Kia description'},
-  {id: '10', name: 'Subaru', description: 'Subaru description'},
-  {id: '11', name: 'Lexus', description: 'Lexus description'},
-  {id: '12', name: 'Mitsubishi', description: 'Mitsubishi description'},
-  {id: '13', name: 'Audi', description: 'Audi description'},
-];
+faker.seed(42);
+export const brands: Array<Brand> = Array.from({length: 13}, (_, i) => ({
+  id: (i + 1).toString(),
+  name: faker.vehicle.manufacturer(),
+  description: faker.lorem.sentence(),
+}));
 
-export const models: Array<Model> = [
-  {
-    id: '1',
-    name: 'Sonata',
-    brandId: '1',
-    description:
-      'The Hyundai Sonata is a mid-size car manufactured by Hyundai. The Sonata is marketed in many countries, including the United States, Canada, Mexico, Australia, and South Korea.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '2',
-    name: 'Corolla',
-    brandId: '2',
-    description:
-      'The Toyota Corolla is a line of subcompact and compact cars manufactured by Toyota. Introduced in 1966, the Corolla was the best-selling car in the world by 1974 and has since become one of the most popular and recognizable cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '3',
-    name: 'Civic',
-    brandId: '3',
-    description:
-      'The Honda Civic is a line of subcompact and compact cars manufactured by Honda. The Civic was introduced in 1972 and has since become one of the most popular and recognizable cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '4',
-    name: 'Mustang',
-    brandId: '4',
-    description:
-      'The Ford Mustang is an American automobile manufactured by Ford. The Mustang is a coupe or convertible car that was originally based on the Ford Falcon compact car.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '5',
-    name: 'Silverado',
-    brandId: '5',
-    description:
-      'The Chevrolet Silverado is a line of full-size and heavy-duty pickup trucks manufactured by General Motors. The Silverado was introduced in 1998 and has since become one of the most popular pickup trucks in the United States.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '6',
-    name: 'Golf',
-    brandId: '6',
-    description:
-      'The Volkswagen Golf is a compact hatchback car manufactured by Volkswagen. The Golf was introduced in 1974 and has since become one of the most popular cars in Europe and other parts of the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '7',
-    name: 'Altima',
-    brandId: '7',
-    description:
-      'The Nissan Altima is a mid-size car manufactured by Nissan. The Altima was introduced in 1992 and has since become one of the most popular cars in the United States.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '8',
-    name: '3',
-    brandId: '8',
-    description:
-      'The Mazda3 is a compact car manufactured by Mazda. The Mazda3 was introduced in 2003 and has since become one of the most popular cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '9',
-    name: 'Sorento',
-    brandId: '9',
-    description:
-      'The Kia Sorento is a mid-size crossover SUV manufactured by Kia Motors. The Sorento was introduced in 2002 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '10',
-    name: 'Forester',
-    brandId: '10',
-    description:
-      'The Subaru Forester is a compact SUV manufactured by Subaru. The Forester was introduced in 1997 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '11',
-    name: 'RX',
-    brandId: '11',
-    description:
-      'The Lexus RX is a luxury crossover SUV manufactured by Lexus. The RX was introduced in 1998 and has since become one of the most popular luxury SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '12',
-    name: 'Outlander',
-    brandId: '12',
-    description:
-      'The Mitsubishi Outlander is a compact SUV manufactured by Mitsubishi Motors. The Outlander was introduced in 2001 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '13',
-    name: 'Q5',
-    brandId: '13',
-    description:
-      'The Audi Q5 is a compact luxury SUV manufactured by Audi. The Q5 was introduced in 2008 and has since become one of the most popular luxury SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '14',
-    name: 'Camry',
-    brandId: '2',
-    description:
-      'The Toyota Camry is a mid-size car manufactured by Toyota. The Camry was introduced in 1980 and has since become one of the most popular cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '15',
-    name: 'CR-V',
-    brandId: '3',
-    description:
-      'The Honda CR-V is a compact SUV manufactured by Honda. The CR-V was introduced in 1997 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '16',
-    name: 'Explorer',
-    brandId: '4',
-    description:
-      'The Ford Explorer is a mid-size SUV manufactured by Ford. The Explorer was introduced in 1990 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '17',
-    name: 'Tiguan',
-    brandId: '5',
-    description:
-      'The Volkswagen Tiguan is a compact SUV manufactured by Volkswagen. The Tiguan was introduced in 2006 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '18',
-    name: 'Jetta',
-    brandId: '6',
-    description:
-      'The Volkswagen Jetta is a compact car manufactured by Volkswagen. The Jetta was introduced in 1992 and has since become one of the most popular cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '19',
-    name: 'Civic',
-    brandId: '7',
-    description:
-      'The Honda Civic is a compact car manufactured by Honda. The Civic was introduced in 1989 and has since become one of the most popular cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '20',
-    name: 'Accord',
-    brandId: '8',
-    description:
-      'The Honda Accord is a mid-size car manufactured by Honda. The Accord was introduced in 1993 and has since become one of the most popular cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '21',
-    name: 'Crosstour',
-    brandId: '9',
-    description:
-      'The Kia Crosstour is a mid-size crossover SUV manufactured by Kia Motors. The Crosstour was introduced in 2012 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '22',
-    name: 'Impreza',
-    brandId: '10',
-    description:
-      'The Subaru Impreza is a compact car manufactured by Subaru. The Impreza was introduced in 1999 and has since become one of the most popular cars in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '23',
-    name: 'RX 350',
-    brandId: '11',
-    description:
-      'The Lexus RX 350 is a mid-size SUV manufactured by Lexus. The RX 350 was introduced in 2000 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '24',
-    name: 'Outback',
-    brandId: '12',
-    description:
-      'The Mitsubishi Outback is a mid-size SUV manufactured by Mitsubishi Motors. The Outback was introduced in 2001 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-  {
-    id: '25',
-    name: 'Q7',
-    brandId: '13',
-    description:
-      'The Audi Q7 is a mid-size SUV manufactured by Audi. The Q7 was introduced in 2008 and has since become one of the most popular SUVs in the world.',
-    imageUrl: `https://picsum.photos/140/140?random=${Math.random()}`,
-  },
-];
+export const models: Array<Model> = Array.from({length: 13}, (_, i) => ({
+  id: (i + 1).toString(),
+  name: faker.vehicle.model(),
+  brandId: (i + 1).toString(),
+  description: faker.lorem.sentence(),
+  imageUrl: faker.image.urlLoremFlickr({
+    category: 'car',
+    width: 140,
+    height: 140,
+  }),
+}));
 
 // units
 export const units: Array<Unit> = [
