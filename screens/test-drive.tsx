@@ -16,6 +16,7 @@ import {H1, P} from '~/components/ui/typography';
 import {camelCaseToHumanCase} from '~/lib/utils';
 import {ScreenProps} from '~/navigation';
 import {Unit} from '~/services';
+import {carImages} from '~/services/mock';
 import {useGetAvailableUnitsByModelIdQuery} from '~/store/api-slice';
 import {useAppSelector} from '~/store/store';
 
@@ -42,9 +43,13 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
       <ScrollView contentContainerClassName="pb-[15rem]">
         <ImageBackground
           source={{uri: model?.imageUrl}}
-          className="mb-4 h-[30rem] w-full overflow-hidden rounded-ee-[100px]"
+          className="mb-4 h-[30rem] w-full justify-end overflow-hidden rounded-ee-[100px] bg-card pb-8 pl-4"
           resizeMode="contain">
-          <Flex className="bg-light/20 h-full w-full items-center justify-center dark:bg-black/20" />
+          <Image
+            source={{uri: brand?.imageUrl}}
+            className="size-20 rounded-2xl"
+            resizeMode="contain"
+          />
         </ImageBackground>
         <View className="px-4">
           <H1 className="text-3xl">
@@ -108,8 +113,9 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
                 value: 'gallery',
                 content: (
                   <View className="flex flex-row flex-wrap">
-                    {Array.from({length: 10}, _ => faker.image.url()).map(
-                      (image, index) => {
+                    {faker.helpers
+                      .arrayElements(carImages, {min: 3, max: 99})
+                      .map((image, index) => {
                         return (
                           <MotiView
                             from={{opacity: 0, translateY: 20}}
@@ -127,8 +133,7 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
                             />
                           </MotiView>
                         );
-                      },
-                    )}
+                      })}
                   </View>
                 ),
               },
@@ -137,12 +142,12 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
         </View>
       </ScrollView>
 
-      <BookButton units={units} />
+      <TestDriveButton units={units} />
     </Page>
   );
 }
 
-const BookButton = ({units = []}: {units: Unit[]}) => {
+const TestDriveButton = ({units = []}: {units: Unit[]}) => {
   const selectedUnitId = useAppSelector(state => state.testDrive.unitId);
   const selectedUnit = units.find(unit => unit.id === selectedUnitId);
 
@@ -156,7 +161,7 @@ const BookButton = ({units = []}: {units: Unit[]}) => {
 
       <Button className="mb-8">
         <Text className="w-full text-center uppercase text-primary-foreground">
-          Book This Car
+          Book Test Drive
         </Text>
       </Button>
     </View>

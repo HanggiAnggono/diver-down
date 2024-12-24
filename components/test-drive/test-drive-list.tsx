@@ -46,11 +46,11 @@ export function TestDriveList(props: Props) {
                 resizeMode="cover"
                 className="absolute h-full w-full"
               />
-              <Flex className="size-full flex-col items-end justify-end bg-black/30 px-4">
+              <Flex className="size-full flex-col items-end justify-end bg-black/30 p-3">
                 <Image
                   source={{uri: unit.model.brand?.imageUrl}}
                   resizeMode="contain"
-                  className="mb-auto size-20 rounded-full"
+                  className="mb-auto size-20 rounded-full bg-white/30 p-2"
                   fadeDuration={1000}
                 />
                 <H3 className="font-semibold text-white">

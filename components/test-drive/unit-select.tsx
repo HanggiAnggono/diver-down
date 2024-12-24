@@ -15,12 +15,14 @@ export function UnitSelect({units = []}: Props) {
   const scrollRef = React.useRef(null);
   const dispatch = useAppDispatch();
   const {unitId} = useAppSelector(state => state.testDrive);
+  const hasSelectedUnit =
+    units.length > 0 && !units.find(unit => unit.id === unitId);
 
   useEffect(() => {
-    if (!unitId && units.length > 0) {
+    if (hasSelectedUnit) {
       dispatch(setUnit(units[0]));
     }
-  }, [unitId, units, dispatch]);
+  }, [hasSelectedUnit, units, dispatch]);
 
   const renderItem = ({item}: {item: Unit; index: number}) => (
     <MotiView
@@ -32,7 +34,7 @@ export function UnitSelect({units = []}: Props) {
         <Image
           source={{uri: item.imageUrl}}
           className={cn(
-            'h-[100px] w-[100px] rounded-xl',
+            'h-[100px] w-[100px] rounded-xl bg-card',
             unitId === item.id && 'border-2 border-primary dark:border-4',
           )}
         />

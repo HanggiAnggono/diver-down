@@ -1,17 +1,26 @@
 import {Brand, Model, TestDrive, TestDriveStatus, Unit} from '~/services';
 import {faker} from '@faker-js/faker';
 
-const carImages = [
+export const brandImages = [
+  'https://www.freeiconspng.com/uploads/toyota-logo-png-2.png',
+  'https://pngimg.com/d/jeep_PNG95.png',
+  'https://w7.pngwing.com/pngs/710/441/png-transparent-honda-logo-car-honda-cr-v-honda-accord-honda-angle-text-logo-thumbnail.png',
+  'https://icon2.cleanpng.com/20180727/rkk/0d43fa33ad8b1adead454ffc7dd57987.webp',
+  'https://w7.pngwing.com/pngs/995/480/png-transparent-bmw-car-logo-bmw-logo-trademark-logo-car-thumbnail.png',
+  'https://w7.pngwing.com/pngs/313/756/png-transparent-aston-martin-db9-car-aston-martin-lagonda-logo-diagonal-angle-text-transport.png',
+];
+
+export const carImages = [
   'https://cdn.pixabay.com/photo/2015/10/01/17/17/car-967387_1280.png',
   'https://purepng.com/public/uploads/large/red-mazda-car-8hq.png',
   'https://pngimg.com/d/toyota_PNG1954.png',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6QS5h9BlU4kVdZfz1sdJYsGmrVRyEVeQQtQ&s',
   'https://www.pngarc.com/wp-content/uploads/2023/05/Car-Wash-With-Water-Blue-Color-Car-With-Water-PNG.png',
   'https://mitrabangunanstore.id/wp-content/uploads/2024/01/black-bmw-m3-coupe-car.png',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFnqN5PHaVtEoxSGCITR7Oo4iMDyRDbzgmRw&s',
   'https://i0.wp.com/sreditingzone.com/wp-content/uploads/2018/05/car-png-10.png?resize=780%2C518&ssl=1',
   'https://img1.picmix.com/output/stamp/normal/4/9/0/9/2389094_e5f7d.png',
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUZ5uzlsjg_xEav6Lr5k-4cqjm26HDwCoWag&s',
+  'https://chevrolet.com.ph/wp-content/uploads/2024/04/What-Makes-a-Car-a-%E2%80%98Sports-Car.png',
+  'https://jakarta.bentleymotors.com/picserver1/userdata/25/11599/3FAdVwEMPE/m_my25_gt_speed_front%20600x300.png',
+  'https://static.vecteezy.com/system/resources/thumbnails/036/268/355/small_2x/ai-generated-car-blue-car-suv-car-sport-utility-vehicle-blue-suv-car-blue-sport-utility-vehicle-suv-car-transparent-background-png.png',
 ];
 
 faker.seed(42);
@@ -21,8 +30,7 @@ export const brands: Array<Brand> = Array.from({length: 13}, (_, i) => {
     id: (i + 1).toString(),
     name,
     description: faker.lorem.sentence(),
-    imageUrl:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvc304MdUGx_obd4Ubt1HUOCBN7IC_Zo7kw&s',
+    imageUrl: faker.helpers.arrayElement(brandImages),
   };
 });
 
