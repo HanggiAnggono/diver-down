@@ -5,7 +5,7 @@ import {cn} from '~/lib/utils';
 import {Unit} from '~/services';
 import {H3, P} from '~/components/ui/typography';
 import {useAppDispatch, useAppSelector} from '~/store/store';
-import {setUnitId} from '~/store/test-drive-slice';
+import {setUnit} from '~/store/test-drive-slice';
 
 interface Props {
   units: Array<Unit>;
@@ -14,20 +14,22 @@ interface Props {
 export function UnitSelect({units = []}: Props) {
   const scrollRef = React.useRef(null);
   const dispatch = useAppDispatch();
-  const unitId = useAppSelector(state => state.testDrive.unitId);
-  const selectedUnit = units.find(unit => unit.id === unitId);
+  const {unitId} = useAppSelector(state => state.testDrive);
 
   useEffect(() => {
-    dispatch(setUnitId(units[0].id));
-  }, [units, dispatch]);
+    console.log({unitId});
+    if (!unitId && units.length > 0) {
+      dispatch(setUnit(units[0]));
+    }
+  }, [unitId, units, dispatch]);
 
-  const renderItem = ({item, index}: {item: Unit; index: number}) => (
+  const renderItem = ({item}: {item: Unit; index: number}) => (
     <MotiView
       from={{scale: 1}}
       animate={{scale: unitId === item.id ? 1.2 : 1}}
       transition={{type: 'timing', duration: 300}}
       className="mx-4 flex flex-col items-center">
-      <Pressable onPress={() => dispatch(setUnitId(item.id))}>
+      <Pressable onPress={() => dispatch(setUnit(item))}>
         <Image
           source={{uri: item.imageUrl}}
           className={cn(

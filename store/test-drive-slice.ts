@@ -1,23 +1,27 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {Unit} from '~/services';
 
 interface TestDriveState {
   unitId: string;
+  unit: Unit | null;
 }
 
 const initialState: TestDriveState = {
   unitId: '',
+  unit: null,
 };
 
 const testDriveSlice = createSlice({
   name: 'testDrive',
   initialState,
   reducers: {
-    setUnitId: (state, action) => {
-      state.unitId = action.payload;
+    setUnit: (state, action) => {
+      state.unitId = action.payload.id;
+      state.unit = action.payload;
     },
   },
 });
 
-export const {setUnitId} = testDriveSlice.actions;
+export const {setUnit} = testDriveSlice.actions;
 
 export default testDriveSlice;

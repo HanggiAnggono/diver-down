@@ -13,6 +13,7 @@ import {
   MapPinIcon,
 } from '~/lib/icons';
 import {Button} from '~/components/ui/button';
+import {useAppSelector} from '~/store/store';
 
 interface Props {
   model: Model;
@@ -20,13 +21,15 @@ interface Props {
   unit: Unit;
 }
 
-export function TestDriveOverview(props: Props) {
-  const {model, brand, unit} = props;
+export function TestDriveOverview() {
+  const {unit} = useAppSelector(state => state.testDrive);
+  const {model} = unit || {};
+  const {brand} = model || {};
 
   const handlePressMap = () => {
     const url = Platform.select({
-      ios: `maps://0,0?q=${unit.location}`,
-      android: `geo:0,0?q=${unit.location}`,
+      ios: `maps://0,0?q=${unit?.location}`,
+      android: `geo:0,0?q=${unit?.location}`,
     });
 
     if (url) {
@@ -41,7 +44,7 @@ export function TestDriveOverview(props: Props) {
           <Text>Unit Location</Text>
         </CardHeader>
         <CardContent>
-          <P className="mb-2 text-card-foreground">{unit.location}</P>
+          <P className="mb-2 text-card-foreground">{unit?.location}</P>
           <Button variant="link" onPress={handlePressMap}>
             <Text>
               View Map <MapPinIcon className="text-blue-400" size={15} />
@@ -58,22 +61,22 @@ export function TestDriveOverview(props: Props) {
             {
               icon: FuelIcon,
               label: 'Engine Type',
-              value: model.specs.engineType,
+              value: model?.specs.engineType,
             },
             {
               icon: ChevronRightIcon,
               label: 'Transmission Type',
-              value: model.specs.transmissionType,
+              value: model?.specs.transmissionType,
             },
             {
               icon: ChevronsRightIcon,
               label: 'Top Speed',
-              value: model.specs.topSpeed,
+              value: model?.specs.topSpeed,
             },
             {
               icon: SettingsIcon,
               label: 'Acceleration',
-              value: model.specs.acceleration,
+              value: model?.specs.acceleration,
             },
           ].map((item, index) => (
             <Flex key={index} className="mb-2 items-center">
@@ -94,15 +97,15 @@ export function TestDriveOverview(props: Props) {
         <CardContent>
           <Flex className="mb-2 items-center">
             <P className="text-sm text-muted-foreground">Brand</P>
-            <P className="text-card-foreground">{brand.name}</P>
+            <P className="text-card-foreground">{brand?.name}</P>
           </Flex>
           <Flex className="mb-2 items-center">
             <P className="text-sm text-muted-foreground">Model</P>
-            <P className="text-card-foreground">{model.name}</P>
+            <P className="text-card-foreground">{model?.name}</P>
           </Flex>
           <Flex className="mb-2 items-center">
             <P className="text-sm text-muted-foreground">Unit</P>
-            <P className="text-card-foreground">{unit.unitNumber}</P>
+            <P className="text-card-foreground">{unit?.unitNumber}</P>
           </Flex>
         </CardContent>
       </Card>
