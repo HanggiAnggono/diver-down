@@ -28,7 +28,7 @@ export function TestDriveList(props: Props) {
       keyExtractor={([index, v]) => v[0].id + index}
       numColumns={2}
       contentContainerClassName="gap-4 p-4"
-      columnWrapperClassName="gap-4 mx-auto"
+      columnWrapperClassName="gap-4"
       renderItem={({item: [key, value], index}) => {
         const unit = value[0];
         return (

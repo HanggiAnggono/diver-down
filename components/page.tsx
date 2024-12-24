@@ -18,7 +18,7 @@ export default function Page({
   useFocusEffect(
     useCallback(() => {
       setOptions({
-        title,
+        headerTitle: title,
       });
     }, [title, setOptions]),
   );

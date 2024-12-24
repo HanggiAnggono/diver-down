@@ -68,7 +68,11 @@ function RootStack() {
         options={{headerShown: false}}
       />
 
-      <Stack.Screen name="TestDrive" component={TestDrive} />
+      <Stack.Screen
+        name="TestDrive"
+        component={TestDrive}
+        options={{headerTitle: '', title: ''}}
+      />
     </Stack.Navigator>
   );
 }
