@@ -2,9 +2,10 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Button, ButtonProps} from '~/components/ui/button';
 import {Text} from '~/components/ui/text';
+import {RootStackParamList} from '~/navigation';
 
 interface Props {
-  to: string;
+  to: keyof RootStackParamList;
   goBack?: boolean;
   children: React.ReactNode;
   _button?: ButtonProps;

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   CompositeNavigationProp,
   NavigationContainer,
@@ -12,12 +12,14 @@ import Onboarding from '~/screens/onboarding';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import TestDrive from '~/screens/test-drive';
 import {useColorScheme} from '~/lib/useColorScheme';
-import {BlurView} from '@react-native-community/blur';
-import {StyleSheet} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Profile from '~/screens/profile';
+import {Header} from '~/navigation/header';
+import {TabBar} from '~/navigation/tab-bar';
 
 export type RootStackParamList = {
   Onboarding: undefined;
-  Home: undefined;
+  HomeTab: undefined;
   TestDrive: {
     modelId: string;
   };
@@ -26,24 +28,14 @@ export type RootStackParamList = {
 export type ScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
-export type UseNavigation<T extends keyof RootStackParamList = 'Home'> =
+export type UseNavigation<T extends keyof RootStackParamList = 'HomeTab'> =
   CompositeNavigationProp<
     NativeStackNavigationProp<RootStackParamList, T>,
     NativeStackNavigationProp<RootStackParamList>
   >;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
-const Header = () => {
-  return (
-    <BlurView
-      id="01J-lp-oVM"
-      blurType="regular"
-      blurAmount={100}
-      style={StyleSheet.absoluteFill}
-    />
-  );
-};
+const Tabs = createBottomTabNavigator();
 
 function RootStack() {
   const {colorScheme} = useColorScheme();
@@ -51,6 +43,7 @@ function RootStack() {
   return (
     <Stack.Navigator
       id={undefined}
+      initialRouteName={__DEV__ ? 'HomeTab' : 'Onboarding'}
       screenOptions={{
         headerTintColor: colorScheme === 'dark' ? '#fff' : '#000',
         headerTransparent: true,
@@ -63,9 +56,9 @@ function RootStack() {
       />
 
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{headerShown: false}}
+        name="HomeTab"
+        component={HomeTab}
+        options={{headerShown: false, headerTitle: 'Home'}}
       />
 
       <Stack.Screen
@@ -74,6 +67,19 @@ function RootStack() {
         options={{headerTitle: '', title: ''}}
       />
     </Stack.Navigator>
+  );
+}
+
+function HomeTab() {
+  return (
+    <Tabs.Navigator
+      tabBar={props => <TabBar {...props} />}
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Tabs.Screen name="Home" component={Home} />
+      <Tabs.Screen name="Profile" component={Profile} />
+    </Tabs.Navigator>
   );
 }
 

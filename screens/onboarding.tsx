@@ -76,7 +76,7 @@ export default function Onboarding() {
                 animate={{opacity: seen.includes(index) ? 1 : 0}}
                 transition={{type: 'timing', duration: 300, delay: 400}}
                 className="flex-row items-center justify-center">
-                <LinkButton to="Home">Get Started</LinkButton>
+                <LinkButton to="HomeTab">Get Started</LinkButton>
               </MotiView>
             )}
           </Flex>
