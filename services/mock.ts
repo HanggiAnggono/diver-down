@@ -1,6 +1,19 @@
 import {Brand, Model, TestDrive, TestDriveStatus, Unit} from '~/services';
 import {faker} from '@faker-js/faker';
 
+const carImages = [
+  'https://cdn.pixabay.com/photo/2015/10/01/17/17/car-967387_1280.png',
+  'https://purepng.com/public/uploads/large/red-mazda-car-8hq.png',
+  'https://pngimg.com/d/toyota_PNG1954.png',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6QS5h9BlU4kVdZfz1sdJYsGmrVRyEVeQQtQ&s',
+  'https://www.pngarc.com/wp-content/uploads/2023/05/Car-Wash-With-Water-Blue-Color-Car-With-Water-PNG.png',
+  'https://mitrabangunanstore.id/wp-content/uploads/2024/01/black-bmw-m3-coupe-car.png',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFnqN5PHaVtEoxSGCITR7Oo4iMDyRDbzgmRw&s',
+  'https://i0.wp.com/sreditingzone.com/wp-content/uploads/2018/05/car-png-10.png?resize=780%2C518&ssl=1',
+  'https://img1.picmix.com/output/stamp/normal/4/9/0/9/2389094_e5f7d.png',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUZ5uzlsjg_xEav6Lr5k-4cqjm26HDwCoWag&s',
+];
+
 faker.seed(42);
 export const brands: Array<Brand> = Array.from({length: 13}, (_, i) => {
   const name = faker.vehicle.manufacturer();
@@ -13,7 +26,7 @@ export const brands: Array<Brand> = Array.from({length: 13}, (_, i) => {
   };
 });
 
-export const models: Array<Model> = Array.from({length: 13}, (_, i) => ({
+export const models: Array<Model> = Array.from({length: 20}, (_, i) => ({
   id: (i + 1).toString(),
   name: faker.vehicle.model(),
   brandId: faker.helpers.arrayElement(brands).id,
@@ -21,7 +34,7 @@ export const models: Array<Model> = Array.from({length: 13}, (_, i) => ({
     return brands.find(b => b.id === this.brandId) as Brand;
   },
   description: faker.lorem.sentence(60),
-  imageUrl: faker.image.urlPicsumPhotos({width: 140, height: 140}),
+  imageUrl: faker.helpers.arrayElement(carImages),
   specs: {
     engineType: faker.helpers.arrayElement([
       'Gasoline',
@@ -81,11 +94,7 @@ export const units: Array<Unit> = Array.from({length: 23}, (_, i) => {
     color: faker.vehicle.color(),
     year: 2023,
     availability: true,
-    imageUrl: faker.image.urlLoremFlickr({
-      category: 'car',
-      width: 140,
-      height: 140,
-    }),
+    imageUrl: faker.helpers.arrayElement(carImages),
     location:
       faker.location.streetAddress() +
       ', ' +

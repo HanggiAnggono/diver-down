@@ -43,7 +43,7 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
         <ImageBackground
           source={{uri: model?.imageUrl}}
           className="mb-4 h-[30rem] w-full overflow-hidden rounded-ee-[100px]"
-          resizeMode="cover">
+          resizeMode="contain">
           <Flex className="bg-light/20 h-full w-full items-center justify-center dark:bg-black/20" />
         </ImageBackground>
         <View className="px-4">

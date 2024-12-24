@@ -17,7 +17,6 @@ export function UnitSelect({units = []}: Props) {
   const {unitId} = useAppSelector(state => state.testDrive);
 
   useEffect(() => {
-    console.log({unitId});
     if (!unitId && units.length > 0) {
       dispatch(setUnit(units[0]));
     }

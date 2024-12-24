@@ -33,14 +33,14 @@ export function TestDriveList(props: Props) {
         const unit = value[0];
         return (
           <Pressable
-            className="h-[45vw] w-[45vw] scale-100 active:scale-90"
+            className="h-[45vw] w-[45vw] scale-100 overflow-hidden rounded-xl bg-card active:scale-90"
             onPress={handlePress(unit)}>
             <MotiView
               key={unit.id + index}
               from={{opacity: 0}}
               animate={{opacity: 1}}
               transition={{type: 'timing', delay: index * 50}}
-              className="relative overflow-hidden rounded-xl">
+              className="relative overflow-hidden">
               <Image
                 source={{uri: unit.model?.imageUrl}}
                 resizeMode="cover"
