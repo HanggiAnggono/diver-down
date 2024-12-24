@@ -53,10 +53,10 @@ export function TestDriveList(props: Props) {
                   className="mb-auto size-20 rounded-full"
                   fadeDuration={1000}
                 />
-                <H3 className="font-semibold text-foreground">
+                <H3 className="font-semibold text-white">
                   {unit.model?.brand?.name} {unit.model?.name}
                 </H3>
-                <H4 className="text-foreground">Available: {value.length}</H4>
+                <H4 className="text-white">Available: {value.length}</H4>
               </Flex>
             </MotiView>
           </Pressable>

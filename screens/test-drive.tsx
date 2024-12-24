@@ -147,7 +147,7 @@ const BookButton = ({units = []}: {units: Unit[]}) => {
   const selectedUnit = units.find(unit => unit.id === selectedUnitId);
 
   return (
-    <View className="absolute bottom-0 left-0 right-0 bg-background p-4 px-8 dark:shadow-md">
+    <View className="absolute bottom-0 left-0 right-0 bg-background p-4 px-8 shadow-md">
       {selectedUnit && (
         <P className="mb-4">
           {selectedUnit?.year} - {selectedUnit?.color}

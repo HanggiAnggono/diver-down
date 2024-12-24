@@ -14,13 +14,14 @@ import store from './store/store';
 import 'react-native-reanimated';
 import 'react-native-gesture-handler';
 import {useColorScheme} from '~/lib/useColorScheme';
+import {PortalHost} from '@rn-primitives/portal';
 
 function App(): React.JSX.Element {
   const {colorScheme, setColorScheme} = useColorScheme();
 
   useEffect(() => {
     if (colorScheme === undefined) {
-      setColorScheme('dark');
+      setColorScheme('light');
     }
   }, [colorScheme, setColorScheme]);
 
@@ -29,6 +30,7 @@ function App(): React.JSX.Element {
       <View className="flex-1">
         <Navigation />
       </View>
+      <PortalHost />
     </Provider>
   );
 }

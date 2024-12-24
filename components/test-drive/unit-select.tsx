@@ -48,13 +48,6 @@ export function UnitSelect({units = []}: Props) {
         <H3>Choose a unit</H3>
         <P>{units.length} units available</P>
       </View>
-      {selectedUnit && (
-        <View className="flex flex-row items-center justify-between">
-          <Text className="text-sm">
-            {selectedUnit.year} - {selectedUnit.color}
-          </Text>
-        </View>
-      )}
       <FlatList
         ref={scrollRef}
         data={units}
