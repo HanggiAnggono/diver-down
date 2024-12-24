@@ -2,25 +2,48 @@ export interface Brand {
   id: string; // Consider using UUID for unique IDs
   name: string;
   description?: string; // Optional description
+  imageUrl?: string; // Optional base image URL for the brand image
 }
 
 export interface Model {
   id: string; // Consider using UUID for unique IDs
   name: string;
   brandId: string; // Foreign key referencing Brand.id
+  brand: Brand;
   description?: string; // Optional description
   imageUrl?: string; // Optional base image URL for the model image
+  specs: {
+    engineType: string;
+    engineCapacity: number;
+    transmissionType: string;
+    driveType: string;
+    fuelType: string;
+    seats: number;
+    doors: number;
+    length: number;
+    width: number;
+    height: number;
+    wheelbase: number;
+    curbWeight: number;
+    grossWeight: number;
+    fuelCapacity: number;
+    topSpeed: number;
+    acceleration: string;
+    torque: string;
+    horsepower: string;
+  };
 }
 
 export interface Unit {
   id: string; // Consider using UUID for unique IDs
   unitNumber: string; // Unique identifier within a model
   modelId: string; // Foreign key referencing Model.id
+  model: Model;
   year: number;
   availability: boolean; // Indicates if the unit is available for booking
   imageUrl?: string; // Optional URL for the unit image
   location: string; // Foreign key referencing Location.id
-  mapUrl?: string; // Optional URL for the map image
+  color?: string;
 }
 
 export interface User {

@@ -31,7 +31,7 @@ export default function Onboarding() {
   const [index, setIndex] = React.useState(0);
 
   return (
-    <View className="flex-1 items-center justify-center bg-primary/80">
+    <View className="flex-1 items-center justify-center bg-background">
       <FlatList
         data={slides}
         horizontal
@@ -67,8 +67,8 @@ export default function Onboarding() {
               animate={{opacity: seen.includes(index) ? 1 : 0}}
               transition={{type: 'timing', duration: 300, delay: 200}}
               className="flex-col items-center justify-center pt-10">
-              <H1 className="mb-4 text-center text-white">{item.title}</H1>
-              <P className="mb-4 text-center text-white">{item.body}</P>
+              <H1 className="mb-4 text-center text-foreground">{item.title}</H1>
+              <P className="mb-4 text-center text-foreground">{item.body}</P>
             </MotiView>
             {index === slides.length - 1 && (
               <MotiView
@@ -87,7 +87,7 @@ export default function Onboarding() {
           <View
             key={i}
             className={`h-2 w-2 rounded-full ${
-              i === index ? 'bg-primary-foreground' : 'bg-primary-foreground/50'
+              i === index ? 'bg-foreground' : 'bg-foreground/50'
             }`}
           />
         ))}

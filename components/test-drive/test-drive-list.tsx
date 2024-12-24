@@ -1,54 +1,65 @@
-import {MotiImage, MotiView, motify} from 'moti';
+import {useNavigation} from '@react-navigation/native';
+import {MotiView} from 'moti';
 import React from 'react';
-import {FlatList, View, ImageBackground, Image} from 'react-native';
+import {FlatList, Image, Pressable} from 'react-native';
 import {Flex} from '~/components/ui/flex';
 import {H3, H4} from '~/components/ui/typography';
 import {groupBy} from '~/lib/utils';
-import {getTestDrives} from '~/services/test-drive-services';
+import {UseNavigation} from '~/navigation';
+import {getTestDriveUnits} from '~/services/test-drive-services';
 
 type Props = {
-  testDrives: Awaited<ReturnType<typeof getTestDrives>>;
+  testDrives: Awaited<ReturnType<typeof getTestDriveUnits>>;
 };
 
-const MotiImgBg = motify(ImageBackground)();
-
 export function TestDriveList(props: Props) {
-  const testDrivesByModel = groupBy(props.testDrives, td => {
-    return td.model?.id;
+  const navigation = useNavigation<UseNavigation>();
+  const unitsByModel = groupBy(props.testDrives, unit => {
+    return unit.modelId;
   });
 
-  return Object.entries(testDrivesByModel).length > 0 ? (
+  const handlePress = (unit: Props['testDrives'][0]) => () => {
+    navigation.navigate('TestDrive', {modelId: unit.modelId});
+  };
+
+  return Object.entries(unitsByModel).length > 0 ? (
     <FlatList
-      data={Object.entries(testDrivesByModel)}
+      data={Object.entries(unitsByModel)}
       keyExtractor={([index, v]) => v[0].id + index}
       numColumns={2}
-      contentContainerClassName="gap-2 px-4"
-      columnWrapperClassName="gap-2"
+      contentContainerClassName="gap-4 p-4"
+      columnWrapperClassName="gap-4 mx-auto"
       renderItem={({item: [key, value], index}) => {
-        const testDrive = value[0];
+        const unit = value[0];
         return (
-          <View className="h-[50vw] w-1/2">
+          <Pressable
+            className="h-[45vw] w-[45vw] scale-100 active:scale-90"
+            onPress={handlePress(unit)}>
             <MotiView
-              key={testDrive.id + index}
-              from={{scale: 1.1, opacity: 0}}
-              animate={{scale: 1, opacity: 1}}
+              key={unit.id + index}
+              from={{opacity: 0}}
+              animate={{opacity: 1}}
               transition={{type: 'timing', delay: index * 50}}
-              className="relative">
+              className="relative overflow-hidden rounded-xl">
               <Image
-                source={{uri: testDrive.model?.imageUrl}}
+                source={{uri: unit.model?.imageUrl}}
                 resizeMode="cover"
-                className="absolute h-full w-full overflow-hidden rounded-xl"
+                className="absolute h-full w-full"
               />
-              <Flex className="size-full flex-col items-end justify-end bg-black/30 p-4">
-                <H3 className="font-semibold text-primary-foreground">
-                  {testDrive.brand?.name} {testDrive.model?.name}
+              <Flex className="size-full flex-col items-end justify-end bg-black/30 px-4">
+                <Image
+                  source={{uri: unit.model.brand?.imageUrl}}
+                  resizeMode="contain"
+                  className="mb-auto size-20 rounded-full"
+                  fadeDuration={1000}
+                />
+                <H3 className="font-semibold text-foreground">
+                  {unit.model?.brand?.name} {unit.model?.name}
                 </H3>
-                <H4 className="text-primary-foreground">
-                  Available: {value.length}
-                </H4>
+                <H4 className="text-foreground">Available: {value.length}</H4>
               </Flex>
             </MotiView>
-          </View>
+          </Pressable>
         );
       }}
     />

@@ -1,6 +1,9 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {fetchCars} from '~/services/car-service';
-import {getTestDrives} from '~/services/test-drive-services';
+import {
+  getAvailableUnitsByModelId,
+  getTestDriveUnits,
+} from '~/services/test-drive-services';
 
 const apiSlice = createApi({
   reducerPath: 'api',
@@ -12,14 +15,24 @@ const apiSlice = createApi({
         return {data: response};
       },
     }),
-    getTestDrives: builder.query({
+    getTestDriveUnits: builder.query({
       queryFn: async () => {
-        const response = await getTestDrives();
+        const response = await getTestDriveUnits();
+        return {data: response};
+      },
+    }),
+    getAvailableUnitsByModelId: builder.query({
+      queryFn: async (modelId: string) => {
+        const response = await getAvailableUnitsByModelId(modelId);
         return {data: response};
       },
     }),
   }),
 });
 
-export const {useGetCarsQuery, useGetTestDrivesQuery} = apiSlice;
+export const {
+  useGetCarsQuery,
+  useGetTestDriveUnitsQuery,
+  useGetAvailableUnitsByModelIdQuery,
+} = apiSlice;
 export default apiSlice;

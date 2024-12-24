@@ -15,7 +15,7 @@ export function formatDate(
 
 export function groupBy<T, K extends keyof T>(
   array: T[],
-  key: (item: T) => K,
+  key: (_item: T) => T[K],
 ): Record<string, T[]> {
   return array.reduce(
     (map, item) => {
@@ -26,4 +26,11 @@ export function groupBy<T, K extends keyof T>(
     },
     {} as Record<string, T[]>,
   );
+}
+
+export function camelCaseToHumanCase(str: string) {
+  return str
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .toUpperCase();
 }

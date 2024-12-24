@@ -9,7 +9,7 @@ type Props = React.ComponentProps<typeof Text>;
 export function LoadingIndicator(props: Props) {
   return (
     <Flex>
-      <ActivityIndicator className="mr-2 text-primary-foreground" />
+      <ActivityIndicator className="mr-2 text-foreground" />
       <AnimatePresence exitBeforeEnter>
         <MotiView
           key={Math.random()}
