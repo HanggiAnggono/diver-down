@@ -19,7 +19,7 @@ export default function Home() {
           <LoadingIndicator className="text-2xl" />
         </Flex>
       )}
-      <TestDriveList testDrives={testDrives} />
+      <TestDriveList models={testDrives} />
     </View>
   );
 }

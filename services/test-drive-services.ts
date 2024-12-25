@@ -1,24 +1,48 @@
-import {testDrives, units} from '~/services/mock';
+import {groupBy} from '~/lib/utils';
+import {models, testDrives, units as unitsMock} from '~/services/mock';
 
 export function getTestDriveUnits() {
-  const availableUnits = units.filter(unit => {
-    const tdUnitIDs = testDrives.map(td => td.unitId);
-    return !tdUnitIDs.includes(unit.id);
-  });
-  return new Promise<typeof availableUnits>(resolve => {
+  const resp = Object.entries(groupBy(unitsMock, u => u.modelId)).map(
+    ([modelId, units]) => {
+      const availableUnits = units.filter(unit => {
+        const tdUnitIDs = testDrives.map(td => td.unitId);
+        return !tdUnitIDs.includes(unit.id);
+      });
+
+      return {
+        modelId,
+        availableUnits: availableUnits.length,
+        model: units[0].model,
+        units,
+      };
+    },
+  );
+
+  return new Promise<typeof resp>(resolve => {
     setTimeout(() => {
-      resolve(availableUnits);
+      resolve(resp);
     }, 1000);
   });
 }
 
 export function getAvailableUnitsByModelId(id: string) {
-  const availableUnits = units.filter(unit => {
-    const tdUnitIDs = testDrives.map(td => td.unitId);
-    return !tdUnitIDs.includes(unit.id);
-  });
+  const units = unitsMock.filter(u => u.modelId === id);
 
-  const resp = availableUnits.filter(unit => unit.modelId === id);
+  const availableUnitIds = units
+    .filter(unit => {
+      const tdUnitIDs = testDrives.map(td => td.unitId);
+      return !tdUnitIDs.includes(unit.id);
+    })
+    .map(unit => unit.id);
+
+  const resp = units.map(unit => {
+    const availability = availableUnitIds.includes(unit.id);
+    console.log({availability});
+    return {
+      ...unit,
+      availability,
+    };
+  });
 
   return new Promise<typeof resp>(resolve => {
     setTimeout(() => {

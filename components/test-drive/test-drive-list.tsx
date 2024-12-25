@@ -4,37 +4,38 @@ import React from 'react';
 import {FlatList, Image, Pressable} from 'react-native';
 import {Flex} from '~/components/ui/flex';
 import {H3, H4} from '~/components/ui/typography';
-import {groupBy} from '~/lib/utils';
+import {cn, groupBy} from '~/lib/utils';
 import {UseNavigation} from '~/navigation';
 import {getTestDriveUnits} from '~/services/test-drive-services';
 
 type Props = {
-  testDrives: Awaited<ReturnType<typeof getTestDriveUnits>>;
+  models: Awaited<ReturnType<typeof getTestDriveUnits>>;
 };
 
 export function TestDriveList(props: Props) {
   const navigation = useNavigation<UseNavigation>();
-  const unitsByModel = groupBy(props.testDrives, unit => {
-    return unit.modelId;
-  });
 
-  const handlePress = (unit: Props['testDrives'][0]) => () => {
-    navigation.navigate('TestDrive', {modelId: unit.modelId});
+  const handlePress = (model: Props['models'][0]) => () => {
+    navigation.navigate('TestDrive', {modelId: model.modelId});
   };
 
-  return Object.entries(unitsByModel).length > 0 ? (
+  return props.models.length > 0 ? (
     <FlatList
-      data={Object.entries(unitsByModel)}
-      keyExtractor={([index, v]) => v[0].id + index}
+      data={props.models}
+      keyExtractor={model => model.modelId}
       numColumns={2}
       contentContainerClassName="gap-4 p-4"
       columnWrapperClassName="gap-4"
-      renderItem={({item: [key, value], index}) => {
-        const unit = value[0];
+      renderItem={({item, index}) => {
+        const {
+          units: [unit],
+          model,
+        } = item;
+
         return (
           <Pressable
             className="h-[45vw] w-[45vw] scale-100 overflow-hidden rounded-xl bg-card active:scale-90"
-            onPress={handlePress(unit)}>
+            onPress={handlePress(item)}>
             <MotiView
               key={unit.id + index}
               from={{opacity: 0}}
@@ -42,21 +43,24 @@ export function TestDriveList(props: Props) {
               transition={{type: 'timing', delay: index * 50}}
               className="relative overflow-hidden">
               <Image
-                source={{uri: unit.model?.imageUrl}}
+                source={{uri: model?.imageUrl}}
                 resizeMode="cover"
-                className="absolute h-full w-full"
+                className={cn(
+                  'absolute h-full w-full',
+                  item.availableUnits === 0 && 'opacity-20',
+                )}
               />
               <Flex className="size-full flex-col items-end justify-end bg-black/30 p-3">
                 <Image
-                  source={{uri: unit.model.brand?.imageUrl}}
+                  source={{uri: model.brand?.imageUrl}}
                   resizeMode="contain"
                   className="mb-auto size-20 rounded-full bg-white/30 p-2"
                   fadeDuration={1000}
                 />
                 <H3 className="font-semibold text-white">
-                  {unit.model?.brand?.name} {unit.model?.name}
+                  {model?.brand?.name} {model?.name}
                 </H3>
-                <H4 className="text-white">Available: {value.length}</H4>
+                <H4 className="text-white">Available: {item.availableUnits}</H4>
               </Flex>
             </MotiView>
           </Pressable>

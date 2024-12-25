@@ -36,10 +36,16 @@ export function UnitSelect({units = []}: Props) {
           className={cn(
             'h-[100px] w-[100px] rounded-xl bg-card',
             unitId === item.id && 'border-2 border-primary dark:border-4',
+            item.availability ? 'opacity-100' : 'opacity-50',
           )}
         />
+        {!item.availability && (
+          <Text className="absolute left-1/2 mt-2 -translate-x-1/2 text-sm font-semibold text-foreground">
+            Unavailable
+          </Text>
+        )}
         <Text className="mt-2 text-sm font-semibold text-foreground">
-          {item.year} - {item.color}
+          {item.year} - {item.color}{' '}
         </Text>
       </Pressable>
     </MotiView>
@@ -49,7 +55,7 @@ export function UnitSelect({units = []}: Props) {
     <View className="flex justify-between">
       <View>
         <H3>Choose a unit</H3>
-        <P>{units.length} units available</P>
+        <P>{units.length} units</P>
       </View>
       <FlatList
         ref={scrollRef}

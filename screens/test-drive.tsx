@@ -14,7 +14,7 @@ import {TabsComponent} from '~/components/ui/tabs-component';
 import {Text} from '~/components/ui/text';
 import {TextAnimated} from '~/components/ui/text-animated';
 import {H1, P} from '~/components/ui/typography';
-import {camelCaseToHumanCase} from '~/lib/utils';
+import {camelCaseToHumanCase, cn} from '~/lib/utils';
 import {ScreenProps} from '~/navigation';
 import {Unit} from '~/services';
 import {carImages} from '~/services/mock';
@@ -40,7 +40,9 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
   }
 
   return (
-    <Page title={model?.name} className="flex-1 bg-background">
+    <Page
+      title={`${model?.brand.name} ${model?.name}`}
+      className="flex-1 bg-background">
       <ScrollView contentContainerClassName="pb-[15rem]">
         <ImageBackground
           source={{uri: model?.imageUrl}}
@@ -151,6 +153,7 @@ export default function TestDrive(props: ScreenProps<'TestDrive'>) {
 const TestDriveButton = ({units = []}: {units: Unit[]}) => {
   const selectedUnitId = useAppSelector(state => state.testDrive.unitId);
   const selectedUnit = units.find(unit => unit.id === selectedUnitId);
+  const availability = selectedUnit?.availability;
 
   return (
     <View className="absolute bottom-0 left-0 right-0 bg-background p-4 px-8 shadow-md">
@@ -160,9 +163,19 @@ const TestDriveButton = ({units = []}: {units: Unit[]}) => {
         </P>
       )}
 
-      <LinkButton to="TestDriveSchedule" params={{unitId: selectedUnitId}}>
-        <Text className="w-full text-center uppercase text-primary-foreground">
-          Book Test Drive
+      <LinkButton
+        _button={{
+          disabled: !availability,
+          className: availability ? '' : 'bg-muted',
+        }}
+        to="TestDriveSchedule"
+        params={{unitId: selectedUnitId}}>
+        <Text
+          className={cn(
+            'w-full text-center uppercase text-primary-foreground',
+            availability ? '' : 'text-muted-foreground',
+          )}>
+          {availability ? 'Book Test Drive' : 'Unavailable'}
         </Text>
       </LinkButton>
     </View>
