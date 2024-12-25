@@ -113,25 +113,21 @@ export const units: Array<Unit> = Array.from({length: 23}, (_, i) => {
 });
 
 // 7 Test Drive Schedules
-export const testDrives: Array<TestDrive> = Array.from(
-  {length: 10},
-  (_, i) => ({
-    id: (i + 1).toString(),
-    unitId: faker.helpers.arrayElement(units).id,
-    userId: (i + 1).toString(),
-    dateFrom: faker.date.future(),
-    dateTo: faker.date.future(),
-    status: faker.helpers.arrayElement([
-      TestDriveStatus.PENDING,
-      TestDriveStatus.CONFIRMED,
-      TestDriveStatus.IN_PROGRESS,
-      TestDriveStatus.COMPLETED,
-      TestDriveStatus.CANCELLED,
-      TestDriveStatus.NO_SHOW,
-    ]),
-    testDriveTypeId: (i + 1).toString(),
-    locationId: (i + 1).toString(),
-    notes: faker.lorem.sentence(),
-    salesRepId: (i + 1).toString(),
-  }),
-);
+export const testDrives: Array<TestDrive> = Array.from({length: 10}, (_, i) => ({
+  id: (i + 1).toString(),
+  unitId: faker.helpers.arrayElement(units).id,
+  userId: (i + 1).toString(),
+  dateFrom: faker.date.future(),
+  dateTo: faker.date.future(),
+  status: faker.helpers.arrayElement([
+    TestDriveStatus.PENDING,
+    TestDriveStatus.CONFIRMED,
+    TestDriveStatus.IN_PROGRESS,
+    TestDriveStatus.COMPLETED,
+    TestDriveStatus.CANCELLED,
+    TestDriveStatus.NO_SHOW,
+  ]),
+  testDriveTypeId: (i + 1).toString(),
+  locationId: (i + 1).toString(),
+  notes: faker.lorem.sentence(),
+}));

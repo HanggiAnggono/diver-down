@@ -16,13 +16,14 @@ import {Button} from '~/components/ui/button';
 import {useAppSelector} from '~/store/store';
 
 interface Props {
-  model: Model;
-  brand: Model['brand'];
-  unit: Unit;
+  /** if provided this props will override the unit from global state  */
+  unit?: Unit;
 }
 
-export function TestDriveOverview() {
-  const {unit} = useAppSelector(state => state.testDrive);
+export function TestDriveOverview(props: Props) {
+  const unit = useAppSelector(state => {
+    return props.unit || state.testDrive.unit;
+  });
   const {model} = unit || {};
   const {brand} = model || {};
 

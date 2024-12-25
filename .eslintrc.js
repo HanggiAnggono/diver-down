@@ -6,5 +6,11 @@ module.exports = {
       'error',
       {varsIgnorePattern: '^_', argsIgnorePattern: '^_'},
     ],
+    'react/no-unstable-nested-components': [
+      'error',
+      {
+        allowAsProps: true,
+      },
+    ],
   },
 };

@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {fetchCars} from '~/services/car-service';
+import {fetchCars, getUnitById} from '~/services/car-service';
 import {
   getAvailableUnitsByModelId,
   getTestDriveUnits,
@@ -27,6 +27,12 @@ const apiSlice = createApi({
         return {data: response};
       },
     }),
+    getUnitById: builder.query({
+      queryFn: async (id: string) => {
+        const response = await getUnitById(id);
+        return {data: response};
+      },
+    }),
   }),
 });
 
@@ -34,5 +40,6 @@ export const {
   useGetCarsQuery,
   useGetTestDriveUnitsQuery,
   useGetAvailableUnitsByModelIdQuery,
+  useGetUnitByIdQuery,
 } = apiSlice;
 export default apiSlice;

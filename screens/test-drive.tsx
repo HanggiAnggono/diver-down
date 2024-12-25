@@ -8,6 +8,7 @@ import {UnitSelect} from '~/components/test-drive/unit-select';
 import {Button} from '~/components/ui/button';
 import {Card} from '~/components/ui/card';
 import {Flex} from '~/components/ui/flex';
+import {LinkButton} from '~/components/ui/link-button';
 import {LoadingIndicator} from '~/components/ui/loading-indicator';
 import {TabsComponent} from '~/components/ui/tabs-component';
 import {Text} from '~/components/ui/text';
@@ -159,11 +160,11 @@ const TestDriveButton = ({units = []}: {units: Unit[]}) => {
         </P>
       )}
 
-      <Button className="mb-8">
+      <LinkButton to="TestDriveSchedule" params={{unitId: selectedUnitId}}>
         <Text className="w-full text-center uppercase text-primary-foreground">
           Book Test Drive
         </Text>
-      </Button>
+      </LinkButton>
     </View>
   );
 };

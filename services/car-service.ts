@@ -8,3 +8,12 @@ export const fetchCars = (): Promise<Array<Unit>> => {
     }, 1000);
   });
 };
+
+export function getUnitById(id: string) {
+  return new Promise<Unit>(resolve => {
+    setTimeout(() => {
+      const unit = units.find(un => un.id === id);
+      resolve(unit as Unit);
+    }, 1000);
+  });
+}

@@ -16,12 +16,16 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Profile from '~/screens/profile';
 import {Header} from '~/navigation/header';
 import {TabBar} from '~/navigation/tab-bar';
+import TestDriveSchedule from '~/screens/test-drive-schedule';
 
 export type RootStackParamList = {
   Onboarding: undefined;
   HomeTab: undefined;
   TestDrive: {
     modelId: string;
+  };
+  TestDriveSchedule: {
+    unitId: string;
   };
 };
 
@@ -64,6 +68,12 @@ function RootStack() {
       <Stack.Screen
         name="TestDrive"
         component={TestDrive}
+        options={{headerTitle: '', title: ''}}
+      />
+
+      <Stack.Screen
+        name="TestDriveSchedule"
+        component={TestDriveSchedule}
         options={{headerTitle: '', title: ''}}
       />
     </Stack.Navigator>
