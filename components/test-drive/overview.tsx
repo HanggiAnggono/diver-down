@@ -11,6 +11,7 @@ import {
   ChevronsRightIcon,
   SettingsIcon,
   MapPinIcon,
+  InfoIcon,
 } from '~/lib/icons';
 import {Button} from '~/components/ui/button';
 import {useAppSelector} from '~/store/store';
@@ -80,13 +81,12 @@ export function TestDriveOverview(props: Props) {
               value: model?.specs.acceleration,
             },
           ].map((item, index) => (
-            <Flex key={index} className="mb-2 items-center">
-              <item.icon className="mr-4 text-card-foreground" />
-              <View>
-                <P className="text-sm text-muted-foreground">{item.label}</P>
-                <P className="text-card-foreground">{item.value}</P>
-              </View>
-            </Flex>
+            <IconLabelValue
+              key={index}
+              Icon={item.icon}
+              label={item.label}
+              value={item.value || ''}
+            />
           ))}
         </CardContent>
       </Card>
@@ -96,20 +96,40 @@ export function TestDriveOverview(props: Props) {
           <Text>Model Information</Text>
         </CardHeader>
         <CardContent>
-          <Flex className="mb-2 items-center">
-            <P className="text-sm text-muted-foreground">Brand</P>
-            <P className="text-card-foreground">{brand?.name}</P>
-          </Flex>
-          <Flex className="mb-2 items-center">
-            <P className="text-sm text-muted-foreground">Model</P>
-            <P className="text-card-foreground">{model?.name}</P>
-          </Flex>
-          <Flex className="mb-2 items-center">
-            <P className="text-sm text-muted-foreground">Unit</P>
-            <P className="text-card-foreground">{unit?.unitNumber}</P>
-          </Flex>
+          <IconLabelValue
+            Icon={InfoIcon}
+            label="Brand"
+            value={brand?.name || ''}
+          />
+          <IconLabelValue
+            Icon={InfoIcon}
+            label="Model"
+            value={model?.name || ''}
+          />
+          <IconLabelValue
+            Icon={InfoIcon}
+            label="Unit"
+            value={unit?.unitNumber || ''}
+          />
         </CardContent>
       </Card>
     </View>
   );
 }
+
+const IconLabelValue = (props: {
+  Icon: any;
+  label: string;
+  value: string | number;
+}) => {
+  const Icon = props.Icon;
+  return (
+    <Flex className="mb-2 items-center">
+      <Icon className="mr-4 text-card-foreground" />
+      <View>
+        <P className="text-sm text-muted-foreground">{props.label}</P>
+        <P className="text-card-foreground">{props.value}</P>
+      </View>
+    </Flex>
+  );
+};

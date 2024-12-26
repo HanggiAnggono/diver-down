@@ -60,7 +60,11 @@ export function TestDriveList(props: Props) {
                 <H3 className="font-semibold text-white">
                   {model?.brand?.name} {model?.name}
                 </H3>
-                <H4 className="text-white">Available: {item.availableUnits}</H4>
+                <H4 className="text-white">
+                  {item.availableUnits > 0
+                    ? `${item.availableUnits} Available`
+                    : 'Unavailable'}
+                </H4>
               </Flex>
             </MotiView>
           </Pressable>

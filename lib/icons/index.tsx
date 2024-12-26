@@ -6,6 +6,9 @@ import {
   MapPinIcon,
   UserCogIcon,
   CarIcon,
+  InfoIcon,
+  AlarmClockIcon,
+  Trash2Icon,
 } from 'lucide-react-native';
 import {iconWithClassName} from './iconWithClassName';
 
@@ -16,6 +19,9 @@ iconWithClassName(ChevronsRightIcon);
 iconWithClassName(MapPinIcon);
 iconWithClassName(UserCogIcon);
 iconWithClassName(CarIcon);
+iconWithClassName(InfoIcon);
+iconWithClassName(AlarmClockIcon);
+iconWithClassName(Trash2Icon);
 
 export {
   FuelIcon,
@@ -25,4 +31,7 @@ export {
   MapPinIcon,
   UserCogIcon,
   CarIcon,
+  InfoIcon,
+  AlarmClockIcon,
+  Trash2Icon,
 };

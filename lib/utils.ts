@@ -34,3 +34,14 @@ export function camelCaseToHumanCase(str: string) {
     .trim()
     .toUpperCase();
 }
+
+export function uniqueArray<T>(array: T[]): T[] {
+  return Array.from(
+    new Set(
+      array.map(item =>
+        typeof item === 'object' ? JSON.stringify(item) : item,
+      ),
+    ),
+  ).map(item => (typeof item === 'string' ? JSON.parse(item) : item));
+}
+
