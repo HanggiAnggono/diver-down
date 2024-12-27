@@ -4,7 +4,7 @@ module.exports = {
   rules: {
     'no-unused-vars': [
       'error',
-      {varsIgnorePattern: '^_', argsIgnorePattern: '^_'},
+      {varsIgnorePattern: '^_', argsIgnorePattern: '*'},
     ],
     'react/no-unstable-nested-components': [
       'error',

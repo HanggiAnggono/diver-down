@@ -1,4 +1,11 @@
-import {Brand, Model, TestDrive, TestDriveStatus, Unit} from '~/services';
+import {
+  Brand,
+  Model,
+  Notification,
+  TestDrive,
+  TestDriveStatus,
+  Unit,
+} from '~/services';
 import {faker} from '@faker-js/faker';
 
 export const brandImages = [
@@ -117,8 +124,7 @@ export const testDrives: Array<TestDrive> = Array.from({length: 10}, (_, i) => (
   id: (i + 1).toString(),
   unitId: faker.helpers.arrayElement(units).id,
   userId: (i + 1).toString(),
-  dateFrom: faker.date.future(),
-  dateTo: faker.date.future(),
+  date: faker.date.future().toISOString(),
   status: faker.helpers.arrayElement([
     TestDriveStatus.PENDING,
     TestDriveStatus.CONFIRMED,
@@ -127,7 +133,6 @@ export const testDrives: Array<TestDrive> = Array.from({length: 10}, (_, i) => (
     TestDriveStatus.CANCELLED,
     TestDriveStatus.NO_SHOW,
   ]),
-  testDriveTypeId: (i + 1).toString(),
-  locationId: (i + 1).toString(),
-  notes: faker.lorem.sentence(),
 }));
+
+export const notifications: Array<Notification> = [];

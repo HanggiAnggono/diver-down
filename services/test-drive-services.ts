@@ -1,4 +1,5 @@
 import {groupBy} from '~/lib/utils';
+import {TestDrive} from '~/services';
 import {models, testDrives, units as unitsMock} from '~/services/mock';
 
 export function getTestDriveUnits() {
@@ -37,7 +38,6 @@ export function getAvailableUnitsByModelId(id: string) {
 
   const resp = units.map(unit => {
     const availability = availableUnitIds.includes(unit.id);
-    console.log({availability});
     return {
       ...unit,
       availability,
@@ -47,6 +47,19 @@ export function getAvailableUnitsByModelId(id: string) {
   return new Promise<typeof resp>(resolve => {
     setTimeout(() => {
       resolve(resp);
+    }, 1000);
+  });
+}
+
+export function ceateTestDrive(testDrive: Omit<TestDrive, 'id'>) {
+  return new Promise<TestDrive>(resolve => {
+    setTimeout(() => {
+      testDrives.push({
+        id: String(testDrives.length + 1),
+        ...testDrive,
+      });
+
+      resolve(testDrive as TestDrive);
     }, 1000);
   });
 }

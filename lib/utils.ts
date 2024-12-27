@@ -45,3 +45,19 @@ export function uniqueArray<T>(array: T[]): T[] {
   ).map(item => (typeof item === 'string' ? JSON.parse(item) : item));
 }
 
+export function getRandomDatesInNextTwoWeeks(): string[] {
+  const dates = [];
+  for (let i = 0; i < 5; i++) {
+    const date = new Date();
+    const min = 1;
+    const max = 14;
+    date.setDate(date.getDate() + Math.random() * (max - min + 1) + min);
+    dates.push(date);
+  }
+
+  return dates
+    .sort((a, b) => {
+      return a.getTime() - b.getTime();
+    })
+    .map(date => dayjs(date).format('YYYY-MM-DD'));
+}

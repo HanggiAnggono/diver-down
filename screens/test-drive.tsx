@@ -1,6 +1,6 @@
 import {faker} from '@faker-js/faker';
 import {MotiView} from 'moti';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, ImageBackground, ScrollView, View} from 'react-native';
 import Page from '~/components/page';
 import {TestDriveOverview} from '~/components/test-drive/overview';
@@ -19,15 +19,21 @@ import {ScreenProps} from '~/navigation';
 import {Unit} from '~/services';
 import {carImages} from '~/services/mock';
 import {useGetAvailableUnitsByModelIdQuery} from '~/store/api-slice';
-import {useAppSelector} from '~/store/store';
+import {useAppDispatch, useAppSelector} from '~/store/store';
+import {resetTestDrive} from '~/store/test-drive-slice';
 
 export default function TestDrive(props: ScreenProps<'TestDrive'>) {
+  const dispatch = useAppDispatch();
   const {modelId} = props.route.params;
   const {data: units = [], isLoading} =
     useGetAvailableUnitsByModelIdQuery(modelId);
   const unit = units?.[0];
   const {model} = unit || {};
   const {brand} = model || {};
+
+  useEffect(() => {
+    dispatch(resetTestDrive());
+  }, [dispatch]);
 
   if (isLoading) {
     return (

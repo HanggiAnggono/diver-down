@@ -17,20 +17,22 @@ import {RadioGroup} from '~/components/ui/radio-group';
 import {Separator} from '~/components/ui/separator';
 import {Text} from '~/components/ui/text';
 import {H2, P} from '~/components/ui/typography';
+import {DAY_OPTIONS, TIME_OPTIONS} from '~/lib/constants';
 import {AlarmClockIcon, Trash2Icon} from '~/lib/icons';
 import {uniqueArray} from '~/lib/utils';
+import {useAppDispatch, useAppSelector} from '~/store/store';
+import {addNotification, removeNotification} from '~/store/test-drive-slice';
 
 export function Notifications() {
-  const [notifications, setNotifications] = useState<
-    Array<{day: number; time: string}>
-  >([]);
+  const notifications = useAppSelector(state => state.testDrive.notifications);
+  const dispatch = useAppDispatch();
 
   const [formState, setFormState] = useState<{
     day: number | null;
-    time: string | null;
+    time: keyof typeof TIME_OPTIONS | null;
   }>({
     day: null,
-    time: '',
+    time: null,
   });
 
   function handleSubmit() {
@@ -38,24 +40,21 @@ export function Notifications() {
       return;
     }
 
-    setNotifications(
-      uniqueArray([
-        ...notifications,
-        {day: formState.day, time: formState.time},
-      ]),
+    dispatch(
+      addNotification({
+        day: formState.day,
+        time: formState.time,
+      }),
     );
 
     setFormState({
       day: null,
-      time: '',
+      time: null,
     });
   }
 
-  function handleDelete(index: number) {
-    return () => {
-      setNotifications(notifications.filter((_, i) => i !== index));
-    };
-  }
+  const handleDelete = (index: number) => () =>
+    dispatch(removeNotification(index));
 
   return (
     <View className="my-4 flex flex-col gap-2">
@@ -67,7 +66,7 @@ export function Notifications() {
           key={index}
           className="flex flex-row items-center justify-between p-2">
           <P>
-            {notification.day} days before, {notification.time}
+            {notification.day} days before, {TIME_OPTIONS[notification.time]}
           </P>
           <Button variant="ghost" onPress={handleDelete(index)}>
             <Trash2Icon className="text-destructive" />
@@ -95,21 +94,21 @@ export function Notifications() {
               onValueChange={value =>
                 setFormState({day: Number(value), time: ''})
               }>
-              {[3, 2, 1].map(value => {
+              {Object.entries(DAY_OPTIONS).map(([label, day]) => {
                 return (
                   <View
-                    key={value}
+                    key={day}
                     className="mb-4 flex flex-row items-center gap-2">
                     <RadioGroupItem
-                      aria-labelledby={`label-for-${value}`}
-                      value={value.toString()}
+                      aria-labelledby={`label-for-${day}`}
+                      value={day.toString()}
                     />
                     <Label
-                      nativeID={`label-for-${value}`}
+                      nativeID={`label-for-${day}`}
                       onPress={_ =>
-                        setFormState({day: value, time: formState.time})
+                        setFormState({day: day, time: formState.time})
                       }>
-                      <Text>{value} Days before</Text>
+                      <Text>{label} before</Text>
                     </Label>
                   </View>
                 );
@@ -121,9 +120,12 @@ export function Notifications() {
             <RadioGroup
               value={formState.time?.toString()}
               onValueChange={value =>
-                setFormState({day: formState.day, time: value})
+                setFormState({
+                  day: formState.day,
+                  time: value as keyof typeof TIME_OPTIONS,
+                })
               }>
-              {['morning', 'afternoon', 'evening'].map(value => {
+              {Object.entries(TIME_OPTIONS).map(([value, hour]) => {
                 return (
                   <View
                     key={value}
@@ -137,7 +139,9 @@ export function Notifications() {
                       onPress={_ =>
                         setFormState({day: formState.day, time: value})
                       }>
-                      <Text>{value}</Text>
+                      <Text>
+                        {value} at {hour}
+                      </Text>
                     </Label>
                   </View>
                 );

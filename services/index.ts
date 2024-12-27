@@ -56,13 +56,8 @@ export interface TestDrive {
   id: string; // Consider using UUID for unique IDs
   unitId: string; // Foreign key referencing Unit.id
   userId: string; // Foreign key referencing User.id
-  dateFrom: Date;
-  dateTo: Date;
+  date: string;
   status: TestDriveStatus;
-  testDriveTypeId: string; // Foreign key referencing TestDriveType.id
-  locationId: string; // Foreign key referencing Location.id
-  notes?: string; // Optional additional notes
-  salesRepId?: string; // Optional foreign key referencing SalesRep.id
 }
 
 export enum TestDriveStatus {
@@ -74,8 +69,9 @@ export enum TestDriveStatus {
   NO_SHOW = 'NO_SHOW',
 }
 
-export interface SalesRep {
-  id: string; // Consider using UUID for unique IDs
-  name: string;
-  // Add other relevant sales rep information
+export interface Notification {
+  id: string;
+  day: number;
+  time: string;
+  testDriveId: string;
 }

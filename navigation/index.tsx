@@ -17,6 +17,7 @@ import Profile from '~/screens/profile';
 import {Header} from '~/navigation/header';
 import {TabBar} from '~/navigation/tab-bar';
 import TestDriveSchedule from '~/screens/test-drive-schedule';
+import SuccessBook from '~/screens/success-book';
 
 export type RootStackParamList = {
   Onboarding: undefined;
@@ -27,6 +28,7 @@ export type RootStackParamList = {
   TestDriveSchedule: {
     unitId: string;
   };
+  SuccessBook: undefined;
 };
 
 export type ScreenProps<T extends keyof RootStackParamList> =
@@ -75,6 +77,12 @@ function RootStack() {
         name="TestDriveSchedule"
         component={TestDriveSchedule}
         options={{headerTitle: '', title: ''}}
+      />
+
+      <Stack.Screen
+        name="SuccessBook"
+        component={SuccessBook}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );

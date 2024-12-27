@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {fetchCars, getUnitById} from '~/services/car-service';
 import {
+  ceateTestDrive,
   getAvailableUnitsByModelId,
   getTestDriveUnits,
 } from '~/services/test-drive-services';
@@ -33,6 +34,17 @@ const apiSlice = createApi({
         return {data: response};
       },
     }),
+    saveTestDrive: builder.mutation({
+      queryFn: async (...data: Parameters<typeof ceateTestDrive>) => {
+        const response = await ceateTestDrive(...data);
+        return {data: response};
+      },
+    }),
+    getCurrentUser: builder.query({
+      queryFn: async () => {
+        return {data: {name: 'test', id: '1'}};
+      },
+    }),
   }),
 });
 
@@ -41,5 +53,7 @@ export const {
   useGetTestDriveUnitsQuery,
   useGetAvailableUnitsByModelIdQuery,
   useGetUnitByIdQuery,
+  useSaveTestDriveMutation,
+  useGetCurrentUserQuery,
 } = apiSlice;
 export default apiSlice;

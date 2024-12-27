@@ -33,6 +33,7 @@ export function Calendar(props: CalendarProps) {
       style={{borderRadius: 10}}
       disabledByDefault
       disableAllTouchEventsForDisabledDays
+      disableAllTouchEventsForInactiveDays
       theme={{
         calendarBackground: toHex(bg),
         monthTextColor: toHex(fg),

@@ -16,3 +16,15 @@ export const NAV_THEME = {
     text: 'hsl(0 0% 98%)', // foreground
   },
 };
+
+export const DAY_OPTIONS = {
+  '3 days': 3,
+  '2 days': 2,
+  '1 day': 1,
+};
+
+export const TIME_OPTIONS = {
+  morning: '08:00:00',
+  afternoon: '12:00:00',
+  evening: '18:00:00',
+};
