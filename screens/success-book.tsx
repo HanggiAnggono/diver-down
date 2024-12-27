@@ -12,7 +12,6 @@ export default function SuccessBook() {
     <Page title="Success Book" className="p-12">
       <View className="flex-1 items-center justify-center">
         <MotiView
-          key={Math.random()}
           from={{translateX: 300}}
           animate={{translateX: 0}}
           transition={{

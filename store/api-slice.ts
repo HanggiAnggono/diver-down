@@ -9,36 +9,35 @@ import {
 const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000'}),
+  tagTypes: ['Units', 'UnitsByModelId', 'Unit'],
   endpoints: builder => ({
-    getCars: builder.query({
-      queryFn: async () => {
-        const response = await fetchCars();
-        return {data: response};
-      },
-    }),
     getTestDriveUnits: builder.query({
       queryFn: async () => {
         const response = await getTestDriveUnits();
         return {data: response};
       },
+      providesTags: ['Units'],
     }),
     getAvailableUnitsByModelId: builder.query({
       queryFn: async (modelId: string) => {
         const response = await getAvailableUnitsByModelId(modelId);
         return {data: response};
       },
+      providesTags: [{type: 'UnitsByModelId'}],
     }),
     getUnitById: builder.query({
       queryFn: async (id: string) => {
         const response = await getUnitById(id);
         return {data: response};
       },
+      providesTags: ['Unit'],
     }),
     saveTestDrive: builder.mutation({
       queryFn: async (...data: Parameters<typeof ceateTestDrive>) => {
         const response = await ceateTestDrive(...data);
         return {data: response};
       },
+      invalidatesTags: ['Unit', 'Units', 'UnitsByModelId'],
     }),
     getCurrentUser: builder.query({
       queryFn: async () => {
@@ -49,7 +48,6 @@ const apiSlice = createApi({
 });
 
 export const {
-  useGetCarsQuery,
   useGetTestDriveUnitsQuery,
   useGetAvailableUnitsByModelIdQuery,
   useGetUnitByIdQuery,
