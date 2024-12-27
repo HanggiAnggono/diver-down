@@ -18,6 +18,7 @@ import {Header} from '~/navigation/header';
 import {TabBar} from '~/navigation/tab-bar';
 import TestDriveSchedule from '~/screens/test-drive-schedule';
 import SuccessBook from '~/screens/success-book';
+import MyTestDrive from '~/screens/my-test-drive';
 
 export type RootStackParamList = {
   Onboarding: undefined;
@@ -29,6 +30,7 @@ export type RootStackParamList = {
     unitId: string;
   };
   SuccessBook: undefined;
+  MyTestDrive: undefined;
 };
 
 export type ScreenProps<T extends keyof RootStackParamList> =
@@ -96,6 +98,11 @@ function HomeTab() {
         headerShown: false,
       }}>
       <Tabs.Screen name="Home" component={Home} />
+      <Tabs.Screen
+        name="MyTestDrive"
+        component={MyTestDrive}
+        options={{title: 'Test Drives'}}
+      />
       <Tabs.Screen name="Profile" component={Profile} />
     </Tabs.Navigator>
   );

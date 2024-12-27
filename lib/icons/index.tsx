@@ -9,6 +9,7 @@ import {
   InfoIcon,
   AlarmClockIcon,
   Trash2Icon,
+  ListTodoIcon,
 } from 'lucide-react-native';
 import {iconWithClassName} from './iconWithClassName';
 
@@ -22,6 +23,7 @@ iconWithClassName(CarIcon);
 iconWithClassName(InfoIcon);
 iconWithClassName(AlarmClockIcon);
 iconWithClassName(Trash2Icon);
+iconWithClassName(ListTodoIcon);
 
 export {
   FuelIcon,
@@ -34,4 +36,5 @@ export {
   InfoIcon,
   AlarmClockIcon,
   Trash2Icon,
+  ListTodoIcon,
 };

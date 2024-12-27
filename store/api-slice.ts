@@ -1,15 +1,16 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {fetchCars, getUnitById} from '~/services/car-service';
 import {
-  ceateTestDrive,
+  createTestDrive,
   getAvailableUnitsByModelId,
   getTestDriveUnits,
+  getTestDrives,
 } from '~/services/test-drive-services';
 
 const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000'}),
-  tagTypes: ['Units', 'UnitsByModelId', 'Unit'],
+  tagTypes: ['Units', 'UnitsByModelId', 'Unit', 'TestDrives'],
   endpoints: builder => ({
     getTestDriveUnits: builder.query({
       queryFn: async () => {
@@ -33,16 +34,22 @@ const apiSlice = createApi({
       providesTags: ['Unit'],
     }),
     saveTestDrive: builder.mutation({
-      queryFn: async (...data: Parameters<typeof ceateTestDrive>) => {
-        const response = await ceateTestDrive(...data);
+      queryFn: async (...data: Parameters<typeof createTestDrive>) => {
+        const response = await createTestDrive(...data);
         return {data: response};
       },
-      invalidatesTags: ['Unit', 'Units', 'UnitsByModelId'],
+      invalidatesTags: ['Unit', 'Units', 'UnitsByModelId', 'TestDrives'],
     }),
     getCurrentUser: builder.query({
       queryFn: async () => {
         return {data: {name: 'test', id: '1'}};
       },
+    }),
+    getTestDrives: builder.query({
+      queryFn: async () => {
+        return {data: await getTestDrives()};
+      },
+      providesTags: ['TestDrives'],
     }),
   }),
 });
@@ -53,5 +60,6 @@ export const {
   useGetUnitByIdQuery,
   useSaveTestDriveMutation,
   useGetCurrentUserQuery,
+  useGetTestDrivesQuery,
 } = apiSlice;
 export default apiSlice;

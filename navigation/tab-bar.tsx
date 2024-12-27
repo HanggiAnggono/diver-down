@@ -4,11 +4,12 @@ import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {MotiView, Text} from 'moti';
 import {PlatformPressable} from '@react-navigation/elements';
 import {useLinkBuilder} from '@react-navigation/native';
-import {CarIcon, UserCogIcon} from '~/lib/icons';
+import {CarIcon, ListTodoIcon, UserCogIcon} from '~/lib/icons';
 import {cn} from '~/lib/utils';
 
 const IconMap = {
   Home: CarIcon,
+  MyTestDrive: ListTodoIcon,
   Profile: UserCogIcon,
 };
 

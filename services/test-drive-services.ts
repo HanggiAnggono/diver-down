@@ -51,7 +51,7 @@ export function getAvailableUnitsByModelId(id: string) {
   });
 }
 
-export function ceateTestDrive(testDrive: Omit<TestDrive, 'id'>) {
+export function createTestDrive(testDrive: Omit<TestDrive, 'id'>) {
   return new Promise<TestDrive>(resolve => {
     setTimeout(() => {
       testDrives.push({
@@ -60,6 +60,23 @@ export function ceateTestDrive(testDrive: Omit<TestDrive, 'id'>) {
       });
 
       resolve(testDrive as TestDrive);
+    }, 1000);
+  });
+}
+
+export function getTestDrives() {
+  const resp = testDrives
+    .filter(td => td.userId === '1')
+    .map(td => {
+      return {
+        ...td,
+        unit: unitsMock.find(u => u.id === td.unitId),
+      };
+    });
+
+  return new Promise<typeof resp>(resolve => {
+    setTimeout(() => {
+      resolve(resp);
     }, 1000);
   });
 }

@@ -53,13 +53,16 @@ export default function TestDriveSchedule(
       date: day,
       status: TestDriveStatus.PENDING,
       userId: user?.id ?? '',
-    }).then(() => {
+    }).then(resp => {
       navigation.dispatch(state => {
         const routes = state.routes.filter(r => {
           return r.name !== 'TestDriveSchedule' && r.name !== 'TestDrive';
         });
 
-        routes.push({name: 'SuccessBook', key: 'SuccessBook'});
+        routes.push({
+          name: 'SuccessBook',
+          key: `SuccessBook-${resp.data?.id || Date.now()}`,
+        });
 
         return CommonActions.reset({
           ...state,
