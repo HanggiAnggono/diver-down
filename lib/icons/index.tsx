@@ -10,6 +10,8 @@ import {
   AlarmClockIcon,
   Trash2Icon,
   ListTodoIcon,
+  LayoutGridIcon,
+  GalleryHorizontalIcon,
 } from 'lucide-react-native';
 import {iconWithClassName} from './iconWithClassName';
 
@@ -24,6 +26,8 @@ iconWithClassName(InfoIcon);
 iconWithClassName(AlarmClockIcon);
 iconWithClassName(Trash2Icon);
 iconWithClassName(ListTodoIcon);
+iconWithClassName(LayoutGridIcon);
+iconWithClassName(GalleryHorizontalIcon);
 
 export {
   FuelIcon,
@@ -37,4 +41,6 @@ export {
   AlarmClockIcon,
   Trash2Icon,
   ListTodoIcon,
+  LayoutGridIcon,
+  GalleryHorizontalIcon,
 };
