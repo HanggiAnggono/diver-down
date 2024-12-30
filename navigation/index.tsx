@@ -51,7 +51,7 @@ function RootStack() {
   return (
     <Stack.Navigator
       id={undefined}
-      initialRouteName={__DEV__ ? 'HomeTab' : 'Onboarding'}
+      initialRouteName="Onboarding"
       screenOptions={{
         headerTintColor: colorScheme === 'dark' ? '#fff' : '#000',
         headerTransparent: true,
