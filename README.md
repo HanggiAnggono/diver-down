@@ -1,78 +1,76 @@
-This git repository belongs to PT. Hyundai AutoEver Indonesia. Please keep it confidential, do not publish or share to anyone without permission from PT. Hyundai AutoEver Indonesia.
+# TestDriveBooking
 
-This git repository is for candidates whose profiles are considered as interesting candidates and high-end developers' quality. Our aim is to create a development based in Jakarta with a very high quality of development standard.
+TestDriveBooking is a mobile application developed using React Native, which provides a seamless experience for booking test drives for cars. This project leverages the power of React Native's component-based architecture and integrates a reusable UI library to enhance the user interface design. Additionally, Redux is utilized for efficient state management across the application.
 
-# ReactNative Project: Hyundai Test Drive Booking System 
+## Features
 
-**Objective**: Develop a mobile application using React Native that allows users to book a test drive for a car by selecting available time slots. 
+- **React Native:** The application is built using React Native, enabling cross-platform development for both iOS and Android.
+- **Reusable UI Library:** We utilize reusable components from a UI library to maintain consistency and improve development efficiency.
+- **Redux State Management:** Redux is employed to manage the application's state, ensuring a predictable and centralized state architecture.
 
-## A. Requirements 
+## Getting Started
 
-### User Interface: 
+These instructions will help you set up and run the project on your local machine for development and testing purposes.
 
-* A home screen displaying a list of available cars for test drives. 
-* A detailed view for each car with information such as model, features, and images. 
-* A booking screen where users can select a date and time slot for the test drive. 
-* A confirmation screen showing the booking details. 
+### Prerequisites
 
-### Functionality: 
+- Node.js (>=18)
+- npm or yarn
+- React Native CLI
 
-* Fetch car data (brand, model, year, image) from a mock API. 
-* Display available time slots for each car. 
-* Allow users to select a date and time slot. 
-* Validate the selected time slot to ensure it is available. 
-* Confirm the booking and display the details. 
+### Installation
 
-### Technical Requirements: 
+1. Clone the repository:
 
-* Use React Native for the frontend. 
-* Using TypeScript for type safety. 
-* State management using Redux or Context API. 
-* Navigation using React Navigation. 
-* Form validation for booking inputs. 
-* Mock API for fetching car data and available time slots. 
+   ```bash
+   git clone https://github.com/yourusername/TestDriveBooking.git
+   cd TestDriveBooking
+   ```
 
-## B. Evaluation Criteria 
+2. Install dependencies:
 
-### Functionality: 
+   ```bash
+   npm install
+   ```
 
-* Correct implementation of all required features. 
-* Smooth and responsive user interface. 
-* Proper error handling and validation. 
+   or
 
-### Code Quality: 
+   ```bash
+   yarn install
+   ```
 
-* Clean, readable, and maintainable code. 
-* Proper use of React Native components and best practices. 
-* Effective state management. 
+3. Run the application:
 
-### User Experience: 
+   For iOS:
 
-* Intuitive and user-friendly design. 
-* Consistent and visually appealing UI. 
+   ```bash
+   npm run ios
+   ```
 
-### Documentation: 
+   For Android:
 
-* Clear instructions on how to set up and run the project. 
-* Comments explaining the code where necessary. 
-* Code needs to be regularly committed in Git with an appropriate commit message explaining the code changes. 
+   ```bash
+   npm run android
+   ```
 
-### Bonus Points 
+## Usage
 
-* Implementing additional features such as user authentication, notifications for booking reminders, or integrating a real Backend API. 
-* Writing unit tests for key components and functions. 
+Once the application is running, users can browse available cars, select a vehicle, and schedule a test drive directly through the app.
 
-## E. Submission
+## Contributing
 
-* Please submit your completed work by creating a pull request to the main branch of our repository. Here are the steps to follow:
-    1. **Commit your changes**: Ensure all your changes are committed to your local branch (ex: branch named `develop`).
-    2. **Include setup instructions**: Add a file named `SETUP.md` with setup instructions and any other relevant information that will help us understand and run your code.
-    3. **Push your branch**: Push your branch to the remote repository. And make sure it's only **single** branch.
-    4. **Create a pull request**: Navigate to the repository on GitHub and create **single** pull request to the `main` branch.
-    5. **Add reviewers**: Please add [rais-haeid](https://github.com/rais-haeid) as a reviewer to the pull request.
-* The due date is 7 days from the assignment date. Please feel free to submit your work any time, before the deadline.
+We welcome contributions from the community. To contribute, please follow these guidelines:
 
-## F. Tips for Candidates
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Submit a pull request detailing your changes.
 
-* Plan the work and break it down into smaller tasks.
-* It’s okay to ask for clarifications if you have any doubts about the requirements. You can create a Github Issues for this and then assign to [rais-haeid](https://github.com/rais-haeid).
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- React Native Community
+- Redux Toolkit
+- UI Library Contributors

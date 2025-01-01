@@ -6,21 +6,32 @@
  */
 import './global.css';
 
-import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
-import {Button} from '~/components/ui/button';
-import {Text} from '~/components/ui/text';
+import React, {useEffect} from 'react';
+import {View} from 'react-native';
+import Navigation from '~/navigation';
+import {Provider} from 'react-redux';
+import store from './store/store';
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
+import {useColorScheme} from '~/lib/useColorScheme';
+import {PortalHost} from '@rn-primitives/portal';
 
 function App(): React.JSX.Element {
+  const {colorScheme, setColorScheme} = useColorScheme();
+
+  useEffect(() => {
+    if (colorScheme === undefined) {
+      setColorScheme('light');
+    }
+  }, [colorScheme, setColorScheme]);
+
   return (
-    <SafeAreaView>
-      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-      <Text className="text-6xl">App.tsx</Text>
-      <Button>
-        <Text>Button</Text>
-      </Button>
-      <Text className="p-4 pt-10 text-6xl text-primary">App.tsx</Text>
-    </SafeAreaView>
+    <Provider store={store}>
+      <View className="flex-1">
+        <Navigation />
+      </View>
+      <PortalHost />
+    </Provider>
   );
 }
 
